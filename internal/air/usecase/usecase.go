@@ -1,6 +1,14 @@
 package usecase
 
-type Postgres interface{}
+import (
+	"context"
+
+	"github.com/amagkn/postgres-sandbox/internal/air/entity"
+)
+
+type Postgres interface {
+	SelectAllPassengers(ctx context.Context) ([]entity.Passenger, error)
+}
 
 type UseCase struct {
 	postgres Postgres

@@ -6,7 +6,7 @@ MIGRATE_PATH = ./migration/postgres
 mod:
 	go mod tidy
 
-dev: migrate-reset mod
+dev: mod
 	go run ./cmd/app
 
 start:
