@@ -6,6 +6,7 @@ import (
 	"github.com/amagkn/postgres-sandbox/config"
 	"github.com/amagkn/postgres-sandbox/internal/app"
 	"github.com/amagkn/postgres-sandbox/pkg/logger"
+	"github.com/amagkn/postgres-sandbox/pkg/validation"
 )
 
 func main() {
@@ -17,6 +18,7 @@ func main() {
 	}
 
 	logger.Init(c.Logger)
+	validation.Init()
 
 	err = app.Run(ctx, c)
 	if err != nil {

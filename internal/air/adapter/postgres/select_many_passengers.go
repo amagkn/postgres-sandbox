@@ -8,9 +8,9 @@ import (
 	"github.com/doug-martin/goqu/v9"
 )
 
-func (p *Postgres) SelectAllPassengers(ctx context.Context) ([]entity.Passenger, error) {
-	// SELECT name FROM air.passenger
-	ds := goqu.From("air.passenger").Select("name")
+func (p *Postgres) SelectManyPassengers(ctx context.Context) ([]entity.Passenger, error) {
+	// sql: SELECT id, name FROM air.passenger
+	ds := goqu.From("air.passenger").Select("id", "name")
 
 	sql, _, err := ds.ToSQL()
 	if err != nil {
@@ -26,7 +26,7 @@ func (p *Postgres) SelectAllPassengers(ctx context.Context) ([]entity.Passenger,
 	var output []entity.Passenger
 	for rows.Next() {
 		var passenger entity.Passenger
-		err := rows.Scan(&passenger.Name)
+		err := rows.Scan(&passenger.ID, &passenger.Name)
 		if err != nil {
 			return nil, base_errors.WithPath("rows.Scan", err)
 		}

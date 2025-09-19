@@ -8,12 +8,12 @@ import (
 	"github.com/amagkn/postgres-sandbox/pkg/logger"
 )
 
-func (h *Handlers) GetPassengerNames(w http.ResponseWriter, _ *http.Request) {
+func (h *Handlers) PassengerNames(w http.ResponseWriter, _ *http.Request) {
 	ctx := context.Background()
 
-	output, err := h.uc.GetPassengersNames(ctx)
+	output, err := h.uc.PassengerNames(ctx)
 	if err != nil {
-		logger.Error(err, "uc.GetPassengersNames")
+		logger.Error(err, "uc.PassengerNames")
 		errorResponse(w, http.StatusInternalServerError, errorPayload{Type: base_errors.InternalServer})
 		return
 	}

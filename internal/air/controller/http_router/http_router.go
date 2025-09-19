@@ -10,6 +10,7 @@ func AirRoutes(r *chi.Mux, uc *usecase.UseCase) {
 	v1 := ver1.New(uc)
 
 	r.Route("/api/v1/air", func(r chi.Router) {
-		r.Get("/get_passenger_names", v1.GetPassengerNames)
+		r.Get("/passenger/all_names", v1.PassengerNames)
+		r.Get("/trips", v1.TripsAll)
 	})
 }
