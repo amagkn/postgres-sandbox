@@ -9,7 +9,7 @@ import (
 	"github.com/doug-martin/goqu/v9"
 )
 
-func (p *Postgres) SelectManyTrips(ctx context.Context, input dto.TripsAllInput) ([]entity.Trip, error) {
+func (p *Postgres) SelectManyTrips(ctx context.Context, input dto.TripAllInput) ([]entity.Trip, error) {
 	// sql: SELECT id, company_id, plane, town_from, town_to, time_out, time_in FROM air.trip where town_from = input.Town
 	ds := goqu.
 		From("air.trip").

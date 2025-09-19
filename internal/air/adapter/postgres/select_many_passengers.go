@@ -3,14 +3,19 @@ package postgres
 import (
 	"context"
 
+	"github.com/amagkn/postgres-sandbox/internal/air/dto"
 	"github.com/amagkn/postgres-sandbox/internal/air/entity"
 	"github.com/amagkn/postgres-sandbox/pkg/base_errors"
 	"github.com/doug-martin/goqu/v9"
 )
 
-func (p *Postgres) SelectManyPassengers(ctx context.Context) ([]entity.Passenger, error) {
+func (p *Postgres) SelectManyPassengers(ctx context.Context, input dto.PassengerAllInput) ([]entity.Passenger, error) {
 	// sql: SELECT id, name FROM air.passenger
 	ds := goqu.From("air.passenger").Select("id", "name")
+	if input.Suffix != "" {
+		// ... where name like '%input.Suffix'
+		ds = ds.Where(goqu.L("name LIKE ?", "%"+input.Suffix))
+	}
 
 	sql, _, err := ds.ToSQL()
 	if err != nil {

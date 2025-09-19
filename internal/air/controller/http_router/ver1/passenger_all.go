@@ -10,11 +10,11 @@ import (
 	"github.com/amagkn/postgres-sandbox/pkg/validation"
 )
 
-func (h *Handlers) TripsAll(w http.ResponseWriter, r *http.Request) {
+func (h *Handlers) PassengerAll(w http.ResponseWriter, r *http.Request) {
 	ctx := context.Background()
 
-	input := dto.TripsAllInput{
-		Town: r.URL.Query().Get("town"),
+	input := dto.PassengerAllInput{
+		Suffix: r.URL.Query().Get("suffix"),
 	}
 
 	invalidFields, err := validation.ValidateStruct(&input)
@@ -24,9 +24,9 @@ func (h *Handlers) TripsAll(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	output, err := h.uc.TripsAll(ctx, input)
+	output, err := h.uc.PassengerAll(ctx, input)
 	if err != nil {
-		logger.Error(err, "uc.TripsAll")
+		logger.Error(err, "uc.PassengerNames")
 		errorResponse(w, http.StatusInternalServerError, errorPayload{Type: base_errors.InternalServer})
 		return
 	}

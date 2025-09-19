@@ -2,11 +2,11 @@ package dto
 
 import "time"
 
-type TripsAllInput struct {
+type TripAllInput struct {
 	Town string `json:"town" validate:"min=3"`
 }
 
-type TripsAllOutput struct {
+type TripAllOutput struct {
 	ID        int       `json:"id"`
 	CompanyID int       `json:"companyID"`
 	Plane     string    `json:"plane"`

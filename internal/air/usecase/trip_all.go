@@ -7,15 +7,15 @@ import (
 	"github.com/amagkn/postgres-sandbox/pkg/base_errors"
 )
 
-func (u *UseCase) TripsAll(ctx context.Context, input dto.TripsAllInput) ([]dto.TripsAllOutput, error) {
+func (u *UseCase) TripAll(ctx context.Context, input dto.TripAllInput) ([]dto.TripAllOutput, error) {
 	trips, err := u.postgres.SelectManyTrips(ctx, input)
 	if err != nil {
 		return nil, base_errors.WithPath("u.postgres.SelectManyTrips", err)
 	}
 
-	output := make([]dto.TripsAllOutput, len(trips))
+	output := make([]dto.TripAllOutput, len(trips))
 	for i := range trips {
-		output[i] = dto.TripsAllOutput(trips[i])
+		output[i] = dto.TripAllOutput(trips[i])
 	}
 
 	return output, nil

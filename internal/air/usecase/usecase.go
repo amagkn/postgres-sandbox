@@ -8,8 +8,9 @@ import (
 )
 
 type Postgres interface {
-	SelectManyPassengers(ctx context.Context) ([]entity.Passenger, error)
-	SelectManyTrips(ctx context.Context, input dto.TripsAllInput) ([]entity.Trip, error)
+	SelectManyPassengers(ctx context.Context, input dto.PassengerAllInput) ([]entity.Passenger, error)
+	SelectManyTrips(ctx context.Context, input dto.TripAllInput) ([]entity.Trip, error)
+	SelectPassengerNames(ctx context.Context) ([]string, error)
 }
 
 type UseCase struct {
